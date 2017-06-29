@@ -1,6 +1,8 @@
 from app import db
 from models import Post
 import sqlite3
+from sqlalchemy import desc
+
 
 # test = {
 # 	'title': 'American – $148: Dallas – Boston (and vice versa). Roundtrip including all Taxes',
@@ -51,7 +53,7 @@ def insert(table, dictionary):
 			destination,
 			destination_airport,
 			carrier,
-			amount_of_money,
+			price,
 			ticket_type,
 			currency,
 			reverse
@@ -60,6 +62,10 @@ def insert(table, dictionary):
 		db.session.merge(Post(*data))
 		db.session.flush()
 		db.session.commit()
+
+def sort_desc():
+	db.session.query(Post).order_by(desc(Post.date_posted))
+	db.session.commit()
 
 
 # COMMIT CHANGES
@@ -81,11 +87,14 @@ def insert(table, dictionary):
 
 # insert("posts" test)
 
-# with sqlite3.connect("posts.db") as connection:
-# 	c = connection.cursor()
-# 	c.execute("""DROP TABLE posts""")
 
-# db.create_all()
+# COMMENT THIS SECTION OUT AFTER TESTING
+
+with sqlite3.connect("posts.db") as connection:
+	c = connection.cursor()
+	c.execute("""DROP TABLE posts""")
+
+db.create_all()
 
 
 

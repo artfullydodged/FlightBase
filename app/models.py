@@ -4,10 +4,10 @@ class Post(db.Model):
 
 	__tablename__ = "posts"
 
-	id_db = db.Column(db.Integer, nullable=False)
+	# id_db = db.Column(db.Integer, nullable=False)
 	title = db.Column(db.String, nullable=False)
 	link = db.Column(db.String, nullable=False, unique=True, primary_key=True)
-	date_posted = db.Column(db.String, nullable=False)
+	date_posted = db.Column(db.DateTime(timezone=False), nullable=False)
 	site = db.Column(db.String, nullable=False)
 	origin = db.Column(db.String, nullable=False)
 	origin_airport = db.Column(db.String, nullable=True)

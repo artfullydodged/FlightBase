@@ -55,7 +55,7 @@ def get_post_links(page):
 			}
 
 			# p["title"] = "" #post.findAll("h2", { "class" : "entry-title"})[0].get_text().replace("\n","").replace("/", " or ")
-			p["date"] = post.findAll("time", { "class" : "entry-date"})[0].get_text().replace("\n","")
+			p["date"] = dateparser.parse(post.findAll("time", { "class" : "entry-date"})[0].get_text().replace("\n",""))
 			p["link"] = post.findAll("h2", { "class" : "entry-title"})[0].findAll("a", href=True)[0]['href']
 
 			# Navigates to actual post to get intro text which has more info than just the title (like carrier)
@@ -85,7 +85,7 @@ def get_post_links(page):
 			}
 
 			p["title"] = post.findAll("h1", { "class" : "post-title"})[0].get_text().replace("\n","").replace("/", " or ")
-			p["date"] = post.findAll("span", { "class" : "date-container"})[0].get_text().replace("\n","")
+			p["date"] = dateparser.parse(post.findAll("span", { "class" : "date-container"})[0].get_text().replace("\n",""))
 			p["link"] = post.findAll("h1", { "class" : "post-title"})[0].findAll("a", href=True)[0]['href']
 			
 			resource["posts"].append(p)
@@ -106,7 +106,7 @@ def get_post_links(page):
 				}
 
 				p["title"] = post.findAll("div", { "class" : "category-list__entry_leadin"})[0].get_text().replace("/", " or ")
-				p["date"] = post.findAll("div", { "class" : "category-list__entry_date"})[0].get_text()
+				p["date"] = dateparser.parse(post.findAll("div", { "class" : "category-list__entry_date"})[0].get_text())
 				p["link"] = "http://www.airfarewatchdog.com" + post.findAll('a', href=True)[0]['href']
 				
 				resource["posts"].append(p)

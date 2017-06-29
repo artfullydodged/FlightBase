@@ -1,5 +1,5 @@
 from FlightBot import get_posts
-from sql import insert
+from sql import insert, sort_desc
 
 # ENTER TARGET WEBSITES TO SCRAPE. CURRENTLY SUPPORTS == SECRET FLYING == , == THE FLIGHT DEAL ==, AND == AIRFARE WATCHDOG ==
 
@@ -22,3 +22,4 @@ def refresh(targets):
 				print(r)
 
 refresh(targets)
+sort_desc()
